@@ -2,7 +2,7 @@
 deployment:
   version: 2
   tasks:
-    - export DEPLOYPATH=/home/a2bremov/davidswinstead.com/misc/jsonbadges-git
+    - export DEPLOYPATH=/home/a2bremov/davidswinstead.com/misc/jsonbadges
     - /bin/cp -R * $DEPLOYPATH
     - /bin/chown -R a2bremov:a2bremov $DEPLOYPATH
     - /bin/chmod 777 $DEPLOYPATH/logs
