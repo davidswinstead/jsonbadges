@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Language Product Badge Generator</title>
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --light-bg: #f8f9fa;
+            --border-color: #dee2e6;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: var(--light-bg);
+            color: #333;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+            margin-left: 10px;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .group-control {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: #fff;
+        }
+
+        .group-control h3 {
+            margin-top: 0;
+            color: var(--secondary-color);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .lang-inputs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+        }
+
+        .lang-input {
+            margin-bottom: 10px;
+        }
+
+        #outputContainer {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e9ecef;
+            border-radius: 6px;
+        }
+
+        #outputContainer h2 {
+            color: var(--success-color);
+        }
+
+        .json-output {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+
+        .json-section {
+            border: 1px solid var(--secondary-color);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .json-section h4 {
+            margin-top: 0;
+            color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🛍️ Product Badge JSON Generator</h1>
+        
+        <div id="groupsContainer">
+            </div>
+
+        <button class="btn-primary" onclick="addGroup()">➕ Add New Group</button>
+        
+        <hr style="margin: 30px 0;">
+
+        <button class="btn-primary" onclick="generateAndSaveJSON()">✅ Generate & Save All JSONs</button>
+
+        <div id="outputContainer" style="display:none;">
+            <h2>Generated JSON Output</h2>
+            <p>The JSONs below have been saved to your **Local Storage** and are ready to be copied.</p>
+            </div>
+    </div>
+
+    <script>
+        const GROUPS_STORAGE_KEY = 'productBadgeGroups';
+        const LANGS = ['en', 'de', 'fr', 'es', 'pl', 'nl', 'it'];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadGroups();
+        });
+
+        // --- Data Loading and Saving ---
+
+        function loadGroups() {
+            const storedGroups = localStorage.getItem(GROUPS_STORAGE_KEY);
+            if (storedGroups) {
+                const groups = JSON.parse(storedGroups);
+                groups.forEach(groupData => {
+                    addGroup(groupData);
+                });
+            } else {
+                // Add a default group if none are loaded
+                addGroup();
+            }
+        }
+
+        function saveGroups() {
+            const groupsContainer = document.getElementById('groupsContainer');
+            const groupElements = groupsContainer.querySelectorAll('.group-control');
+            const groupsData = [];
+
+            groupElements.forEach(groupEl => {
+                const groupName = groupEl.querySelector('.group-name').value;
+                const productIds = groupEl.querySelector('.product-ids').value;
+                
+                const langTexts = {};
+                LANGS.forEach(lang => {
+                    langTexts[lang] = groupEl.querySelector(`.lang-text-${lang}`).value;
+                });
+
+                groupsData.push({
+                    name: groupName,
+                    ids: productIds,
+                    texts: langTexts
+                });
+            });
+
+            localStorage.setItem(GROUPS_STORAGE_KEY, JSON.stringify(groupsData));
+            console.log('Groups saved to Local Storage.');
+        }
+
+        // --- UI Functions ---
+
+        let groupCounter = 0; // Simple counter for unique ID generation (optional)
+
+        function addGroup(groupData = {}) {
+            groupCounter++;
+            const groupId = `group-${Date.now()}-${groupCounter}`; // Unique ID
+
+            const defaultData = {
+                name: groupData.name || `Group ${groupCounter}`,
+                ids: groupData.ids || '',
+                texts: groupData.texts || {}
+            };
+
+            const langInputsHTML = LANGS.map(lang => `
+                <div class="lang-input">
+                    <label for="${groupId}-text-${lang}">${lang.toUpperCase()} Badge Text:</label>
+                    <input type="text" id="${groupId}-text-${lang}" class="lang-text-${lang}" value="${defaultData.texts[lang] || ''}" oninput="saveGroups()">
+                </div>
+            `).join('');
+
+            const groupsContainer = document.getElementById('groupsContainer');
+            const groupHTML = document.createElement('div');
+            groupHTML.className = 'group-control';
+            groupHTML.id = groupId;
+            groupHTML.innerHTML = `
+                <h3>Group Settings</h3>
+                <div class="form-group">
+                    <label for="${groupId}-name">Group Name (Internal Reference):</label>
+                    <input type="text" id="${groupId}-name" class="group-name" value="${defaultData.name}" oninput="saveGroups()">
+                </div>
+
+                <div class="form-group">
+                    <label for="${groupId}-ids">Product IDs (One per line):</label>
+                    <textarea id="${groupId}-ids" class="product-ids" rows="5" oninput="saveGroups()">${defaultData.ids}</textarea>
+                </div>
+
+                <div class="lang-inputs">
+                    ${langInputsHTML}
+                </div>
+
+                <button class="btn-danger" onclick="removeGroup('${groupId}')">🗑️ Remove Group</button>
+            `;
+            
+            groupsContainer.appendChild(groupHTML);
+            saveGroups(); // Save immediately after adding a new group
+        }
+
+        function removeGroup(groupId) {
+            if (confirm('Are you sure you want to remove this group?')) {
+                document.getElementById(groupId).remove();
+                saveGroups(); // Save after removing
+            }
+        }
+
+        // --- JSON Generation ---
+
+        function generateAndSaveJSON() {
+            saveGroups(); // Ensure the latest data is saved before generation
+            const storedGroups = localStorage.getItem(GROUPS_STORAGE_KEY);
+            if (!storedGroups) {
+                alert('No groups found to generate JSON.');
+                return;
+            }
+
+            const groups = JSON.parse(storedGroups);
+            const allLanguageJSONs = {};
+
+            LANGS.forEach(lang => {
+                const languageJSON = {};
+                
+                groups.forEach(group => {
+                    const badgeText = group.texts[lang] || '';
+                    if (badgeText) {
+                        // Split IDs by newline, filter out empty lines, and trim whitespace
+                        const productIds = group.ids
+                            .split('\n')
+                            .map(id => id.trim())
+                            .filter(id => id.length > 0);
+
+                        productIds.forEach(id => {
+                            // Ensure the ID is valid (e.g., not just empty string)
+                            if (id) {
+                                languageJSON[id] = {
+                                    "badgeStyle": "custom",
+                                    "badgeText": badgeText
+                                };
+                            }
+                        });
+                    }
+                });
+
+                allLanguageJSONs[lang] = languageJSON;
+            });
+
+            // Display the generated JSONs
+            displayJSONOutputs(allLanguageJSONs);
+        }
+
+        function displayJSONOutputs(allLanguageJSONs) {
+            const outputContainer = document.getElementById('outputContainer');
+            outputContainer.style.display = 'block';
+
+            let outputHTML = '';
+            
+            LANGS.forEach(lang => {
+                const jsonString = JSON.stringify(allLanguageJSONs[lang], null, 4);
+                
+                outputHTML += `
+                    <div class="json-section">
+                        <h4>${lang.toUpperCase()} JSON (Total Products: ${Object.keys(allLanguageJSONs[lang]).length})</h4>
+                        <div class="json-output">
+                            ${jsonString}
+                        </div>
+                        <button class="btn-primary" onclick="copyToClipboard(this)">📋 Copy JSON</button>
+                    </div>
+                `;
+            });
+
+            document.getElementById('outputContainer').innerHTML = `
+                <h2>Generated JSON Output</h2>
+                <p>The JSONs below have been saved to your **Local Storage** and are ready to be copied.</p>
+                ${outputHTML}
+            `;
+        }
+
+        function copyToClipboard(button) {
+            const jsonElement = button.previousElementSibling;
+            const textToCopy = jsonElement.innerText;
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                button.textContent = '✅ Copied!';
+                setTimeout(() => {
+                    button.textContent = '📋 Copy JSON';
+                }, 2000);
+            }).catch(err => {
+                console.error('Could not copy text: ', err);
+                alert('Failed to copy. Please manually select and copy the text.');
+            });
+        }
+    </script>
+</body>
+</html>

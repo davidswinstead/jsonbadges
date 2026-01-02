@@ -1,0 +1,97 @@
+{
+    "configName": "ATP-8330 Find Your Running Shoe",
+    "timestamp": "2025-12-04T16:13:47.023Z",
+    "groups": [
+        {
+            "name": "Stability and comfort, all-rounder for beginners: Supernova Rise 2",
+            "ids": "IH2504\nJI1408\nJR7685\nJR9334\nJQ7709\nJQ7700\nJQ7701\nJQ7704\nJQ7676\nJQ7702\nJQ7699\nIH2582\nIH8708\nJI4510\nJQ4737\nJR7686\nJS3046\nJS0493\nJR3380\nJS1890",
+            "texts": {
+                "en": "Stability and comfort, all-rounder for beginners",
+                "de": "Stabilit\u00e4t und Komfort, Allrounder f\u00fcr Einsteiger",
+                "fr": "Stabilit\u00e9 et confort, id\u00e9al pour les d\u00e9butants",
+                "es": "Estabilidad y comodidad, el todoterreno perfecto para principiantes",
+                "pl": "Stabilno\u015b\u0107 i komfort, wszechstronne buty dla pocz\u0105tkuj\u0105cych",
+                "nl": "Stabiliteit en comfort, allrounder voor beginners",
+                "it": "Perfetta per iniziare a correre con il giusto supporto e comfort"
+            }
+        },
+        {
+            "name": "Best choice for comfort on a budget: Duramo 10",
+            "ids": "HP2379\nHP2386",
+            "texts": {
+                "en": "Best choice for comfort on a budget",
+                "de": "Beste Wahl f\u00fcr Komfort mit kleinem Budget",
+                "fr": "Le meilleur choix pour un confort \u00e0 petit prix",
+                "es": "La mejor opci\u00f3n para comodidad al mejor precio",
+                "pl": "Najlepszy wyb\u00f3r zapewniaj\u0105cy komfort w przyst\u0119pnej cenie",
+                "nl": "Beste keuze voor comfort binnen budget ",
+                "it": "Comfort assicurato ad un piccolo prezzo"
+            }
+        },
+        {
+            "name": "Wrap-around heel for added stability: Adistar BYD",
+            "ids": "JI1226\nJR0281\nJR0280\nJR0278\nKK3540\nJP6562\nJP6561\nJQ0838\nKI4243\nID6176\nJI1224\nJI1225\nJS2863\nJQ5724\nJQ5711\nJQ5723\nID6174\nID6177\nJS0583\nJR0277\nJR0273\nJR0274\nJP6567\nJR9916\nJP6566\nJS2864\nJI1228\nIF9561\nID6175\nID6178",
+            "texts": {
+                "en": "Wrap-around heel for added stability",
+                "de": "Stabiler Fersenbereich f\u00fcr zus\u00e4tzlichen Halt",
+                "fr": "Talon enveloppant pour une stabilit\u00e9 renforc\u00e9e",
+                "es": "Tal\u00f3n envolvente para mayor estabilidad",
+                "pl": "Wspieraj\u0105ce buty zapewniaj\u0105ce dodatkow\u0105 stabilno\u015b\u0107",
+                "nl": "Ondersteunende hardloopschoen voor extra stabiliteit",
+                "it": "Maggior comfort e supporto per migliorarei tuoi risultati"
+            }
+        },
+        {
+            "name": "Extra cushioning for longer runs: Adistar 4",
+            "ids": "JR0313\nJR0309\nJR0314\nJR0315\nJR0310\nJR0318\nJP6576\nJP6573\nJP6575\nJP6574\nJR0292\nJR0295\nJR0289\nJR0286\nJR0287\nJR0293\nJP6583\nJP6582",
+            "texts": {
+                "en": "Extra cushioning for longer runs",
+                "de": "Maximale D\u00e4mpfung f\u00fcr lange L\u00e4ufe",
+                "fr": "Amorti suppl\u00e9mentaire pour les longues courses",
+                "es": "Amortiguaci\u00f3n extra para carreras m\u00e1s largas",
+                "pl": "Dodatkowa amortyzacja na d\u0142u\u017csze biegi",
+                "nl": "Extra demping voor lange afstanden",
+                "it": "Extra cushioning per allungare la tua performance"
+            }
+        },
+        {
+            "name": "The ultimate race-day performance shoe: Adizero Adios Pro 4",
+            "ids": "JR6365\nJR6369\nJR6364\nJR1094\nJR1269\nJR1251\nJR1267\nJR1245\nJP6314\nJR1656\nJR4887\nJP6997\nJP6623\nJR7088\nJP6624\nKJ3062\nJR6373\nJR6363\nJR6367\nJR6366\nJR6368\nJR6372\nJR6354\nJR6360\nJR6355\nJR1163\nJR1241\nJR1242\nJR1247\nJR1243\nJQ1689\nJQ1691\nJR7087\nKI3467\nJQ1690\nKJ3064\nJR6358\nJR6357\nJR6350\nJR6356\nJR6359\nJR6362",
+            "texts": {
+                "en": "The ultimate race-day performance",
+                "de": "Der ultimative Wettkampf Schuh",
+                "fr": "Chaussure de performance ultime pour la comp\u00e9tition",
+                "es": "La zapatilla definitiva para el rendimiento en d\u00eda de carrera",
+                "pl": "Najlepsze buty w dzie\u0144 zawod\u00f3w",
+                "nl": "De ultieme competitie schoen",
+                "it": "La scarpa perfetta in gara"
+            }
+        },
+        {
+            "name": "Our lightest and fastest running shoe: Adizero Adios Pro Evo 2",
+            "ids": "JR7259",
+            "texts": {
+                "en": " Our lightest and fastest running shoe",
+                "de": "Unser leichtester und schnellster Laufschuh",
+                "fr": "Nos chaussures de course les plus l\u00e9g\u00e8res et rapides. ",
+                "es": "Nuestra zapatilla de correr m\u00e1s ligera y r\u00e1pida",
+                "pl": "Nasze najl\u017cejsze i najszybsze buty do biegania",
+                "nl": "Onze lichtste en snelste hardloopschoen ",
+                "it": "La pi\u00f9 leggera, la pi\u00f9 veloce"
+            }
+        },
+        {
+            "name": "Trail running shoe that can handle anything: Terrex Agravic Speed",
+            "ids": "IF6594\nIH3764\nJR5238\nJR5217\nIH0979\nIF6597\nIH3767\nJR5245\nJQ1616\nIG8850\n",
+            "texts": {
+                "en": "Style when you run, or when you don't",
+                "de": "Trailrunning-Schuh, der alles aush\u00e4lt",
+                "fr": "Les chaussures de trail pr\u00eates \u00e0 tout affronter ",
+                "es": "Zapatilla de trail running que puede con todo",
+                "pl": "Buty do biegania w terenie, doskona\u0142a przyczepno\u015b\u0107 na ka\u017cdym szlaku",
+                "nl": "Trailrunning schoen die alles aankan",
+                "it": "La scarpa da trail running che niente pu\u00f2 fermare"
+            }
+        }
+    ]
+}
