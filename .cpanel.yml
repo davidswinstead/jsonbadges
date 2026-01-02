@@ -2,7 +2,7 @@
 deployment:
   version: 2
   tasks:
-    - export REPOPATH=/home/a2bremov/davidswinstead.com/misc/jsonbadges-deployed
+    - export REPOPATH=/home/a2bremov/davidswinstead.com/misc/jsonbadges-git
     - /bin/cp -R * $REPOPATH
     - /bin/chown -R a2bremov:a2bremov $REPOPATH
     - /bin/chmod 777 $REPOPATH/logs
